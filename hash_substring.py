@@ -17,18 +17,28 @@ def print_occurrences(output):
 
 def get_occurrences(pattern, text):
     P_len = len(pattern)
-    P = hash(pattern)
+    c = 256
     T_len = len(text)
-    T = hash(text[:P_len])
+    p = 101
+    h = pow(c, P_len - 1) % p
     pos = []
+    P = 0
+    T = 0
 
+    for i in range(P_len):
+        P = (c * P + ord(pattern[i])) % p
+        T = (c * T + ord(text[i])) % p
+        
     for i in range(T_len - P_len + 1):
         if T == P:
-            if text[i:i+P_len] == pattern:
+            if text[i:i + P_len] == pattern:
                 pos.append(i)
         if i < T_len - P_len:
-            T = hash(text[i+1:i+P_len+1])
-    
+            T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len]))% p
+            if T < 0:
+                T += p
+
+
     return pos
 
 pattern = input()
