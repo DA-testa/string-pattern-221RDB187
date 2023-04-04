@@ -38,8 +38,8 @@ def get_occurrences(pattern, text):
 
     return pos
 
-pattern = input().lower()
-text = input().lower()
+pattern = input()
+text = input()
 
 if __name__ == '__main__':
     print_occurrences(get_occurrences(pattern, text))
