@@ -1,6 +1,5 @@
 # python3
 # 221RDB187
-
 def read_input():
     inp = input()
     if "F" in inp:
@@ -32,9 +31,9 @@ def get_occurrences(pattern, text):
     
     return pos
 
-pattern = input().strip()
-text = input().strip()
+pattern = input()
+text = input()
 
 
 if __name__ == '__main__':
-    print_occurrences(get_occurrences(*read_input()))
+    print_occurrences(get_occurrences(pattern, text))
