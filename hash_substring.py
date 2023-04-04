@@ -4,7 +4,7 @@
 def read_input():
     inp = input()
     if "F" in inp:
-        with open(str("./tests/06"), mode="r") as fails:
+        with open(str("./Tests/06"), mode="r") as fails:
             pattern = fails.readline()
             text = fails.readline()
         return (pattern.rstrip(), text.rstrip())
