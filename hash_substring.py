@@ -6,7 +6,7 @@ def read_input():
         with open(str("./tests/06"), mode="r") as fails:
             pattern = fails.readline()
             text = fails.readline()
-        return (pattern.rstrip(), text.rstrip())
+        return (pattern.rstrip().lower(), text.rstrip().lower())
     elif "I" in inp:
         return (input().rstrip(), input().rstrip())
     else:
