@@ -1,23 +1,39 @@
-def rabin_karp(pattern, text):
+# python3
+# 221RDB187
+
+def read_input():
+    inp = input()
+    if "F" in inp:
+        with open(str("./tests/06"), mode="r") as fails:
+            pattern = fails.readline()
+            text = fails.readline()
+        return (pattern.rstrip(), text.rstrip())
+    elif "I" in inp:
+        return (input().rstrip(), input().rstrip())
+    else:
+        print("Input error")
+
+def print_occurrences(output):
+    print(' '.join(map(str, output)))
+
+def get_occurrences(pattern, text):
     P_len = len(pattern)
     P = hash(pattern)
     T_len = len(text)
     T = hash(text[:P_len])
-
     pos = []
 
-    for _ in range(T_len - P_len + 1):
+    for i in range(T_len - P_len + 1):
         if T == P:
-            if text[_:_+P_len] == pattern:
-                pos.append(_)
-        if _ < T_len - P_len:
-            T = hash(text[_+1:_+P_len+1])
+            if text[i:i+P_len] == pattern:
+                pos.append(i)
+        if i < T_len - P_len:
+            T = hash(text[i+1:i+P_len+1])
+    
     return pos
-pattern = input()
-pattern.strip()
-text = input()
-text.strip()
 
-positions = rabin_karp(pattern, text)
+pattern = input().strip()
+text = input().strip()
 
-print(*positions)
+if __name__ == '__main__':
+    print_occurrences(get_occurrences(pattern, text))
