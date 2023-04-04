@@ -4,7 +4,7 @@
 def read_input():
     inp = input()
     if "F" in inp:
-        with open(str("./Tests/06"), mode="r") as fails:
+        with open(str("./tests/06"), mode="r") as fails:
             pattern = fails.readline()
             text = fails.readline()
         return (pattern.rstrip(), text.rstrip())
@@ -35,5 +35,6 @@ def get_occurrences(pattern, text):
 pattern = input().strip()
 text = input().strip()
 
+
 if __name__ == '__main__':
-    print_occurrences(get_occurrences(pattern, text))
+    print_occurrences(get_occurrences(*read_input()))
