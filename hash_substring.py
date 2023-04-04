@@ -1,12 +1,10 @@
-# python3
-# 221RDB187
 def read_input():
     inp = input()
     if "F" in inp:
         with open(str("./tests/06"), mode="r") as fails:
             pattern = fails.readline()
             text = fails.readline()
-        return (pattern.rstrip().lower(), text.rstrip().lower())
+        return (pattern.rstrip(), text.rstrip())
     elif "I" in inp:
         return (input().rstrip(), input().rstrip())
     else:
@@ -38,12 +36,10 @@ def get_occurrences(pattern, text):
             if T < 0:
                 T += p
 
-
     return pos
 
-pattern = input()
-text = input()
-
+pattern = input().lower()
+text = input().lower()
 
 if __name__ == '__main__':
     print_occurrences(get_occurrences(pattern, text))
