@@ -35,7 +35,6 @@ def get_occurrences(pattern, text):
             T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len]))% p
             if T < 0:
                 T += p
-
     return pos
 
 pattern = input()
