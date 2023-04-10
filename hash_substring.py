@@ -1,9 +1,10 @@
+#221RDB187
 def read_input():
-    inp = input()
+    inp = input().rstrip()
     if "F" in inp:
-        with open(str("./tests/06"), mode="r") as fails:
-            pattern = fails.readline()
-            text = fails.readline()
+        with open('./tests/06', 'r') as fails:
+            pattern = fails.readline().rstrip()
+            text = fails.readline().rstrip()
         return (pattern.rstrip(), text.rstrip())
     elif "I" in inp:
         return (input().rstrip(), input().rstrip())
@@ -17,7 +18,7 @@ def get_occurrences(pattern, text):
     P_len = len(pattern)
     c = 256
     T_len = len(text)
-    p = 101
+    p = 13
     h = pow(c, P_len - 1) % p
     pos = []
     P = 0
@@ -35,6 +36,7 @@ def get_occurrences(pattern, text):
             T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len]))% p
             if T < 0:
                 T += p
+
     return pos
 
 pattern = input()
