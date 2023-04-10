@@ -1,15 +1,19 @@
 #221RDB187
 def read_input():
-    inp = input().rstrip()
-    if "F" in inp:
-        with open('./tests/06', 'r') as fails:
-            pattern = fails.readline().rstrip()
-            text = fails.readline().rstrip()
-        return (pattern.rstrip(), text.rstrip())
-    elif "I" in inp:
-        return (input().rstrip(), input().rstrip())
+    input_type = input().rstrip()
+
+    if input_type == "I":
+        pattern = input().rstrip()
+        text = input().rstrip()
+
+    elif input_type == "F":
+        with open('./tests/06', 'r') as f:
+            pattern = f.readline().rstrip()
+            text = f.readline().rstrip()
     else:
-        print("Input error")
+        print("input-error")
+
+    return (pattern, text)
 
 def print_occurrences(output):
     print(' '.join(map(str, output)))
