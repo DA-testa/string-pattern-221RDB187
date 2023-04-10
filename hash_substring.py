@@ -2,16 +2,18 @@
 def read_input():
     inp = input().rstrip()
 
-    if "F" in inp:
+
+    if "I" in inp:
+        pattern = input().rstrip()
+        text = input().rstrip()
+    elif "F" in inp:
         with open('./tests/06', 'r') as fails:
             pattern = fails.readline().rstrip()
             text = fails.readline().rstrip()
         return (pattern.rstrip(), text.rstrip())
-    elif "I" in inp:
-        pattern = fails.readline().rstrip()
-        text = fails.readline().rstrip()
     else:
         print("Input error")
+
     return(pattern, text)
 
 def print_occurrences(output):
@@ -41,7 +43,7 @@ def get_occurrences(pattern, text):
         T = (c * T + ord(text[i])) % p
         
     for i in range(T_len - P_len + 1):
-        if T == P and pattern == text[i:i + P_len] :
+        if P == T and pattern == text[i:i + P_len] :
                 pos.append(i)
         if i < T_len - P_len:
             T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len])) % p
