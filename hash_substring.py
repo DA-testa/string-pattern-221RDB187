@@ -1,50 +1,53 @@
 #221RDB187
 def read_input():
-    input_type = input().rstrip()
+    inp = input().rstrip()
 
-    if input_type == "I":
-        pattern = input().rstrip()
-        text = input().rstrip()
-
-    elif input_type == "F":
-        with open('./tests/06', 'r') as f:
-            pattern = f.readline().rstrip()
-            text = f.readline().rstrip()
+    if "F" in inp:
+        with open('./tests/06', 'r') as fails:
+            pattern = fails.readline().rstrip()
+            text = fails.readline().rstrip()
+        return (pattern.rstrip(), text.rstrip())
+    elif "I" in inp:
+        pattern = fails.readline().rstrip()
+        text = fails.readline().rstrip()
     else:
-        print("input-error")
-
-    return (pattern, text)
+        print("Input error")
+    return(pattern, text)
 
 def print_occurrences(output):
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
     P_len = len(pattern)
-    c = 256
     T_len = len(text)
-    p = 13
-    h = pow(c, P_len - 1) % p
+
+    if T_len < P_len:
+        return []
+    
+
     pos = []
     P = 0
     T = 0
+    c = 256
+    p = 13
+    h = 1
+
+    for i in range(P_len - 1):
+        h = (h * c) % p
+    
 
     for i in range(P_len):
         P = (c * P + ord(pattern[i])) % p
         T = (c * T + ord(text[i])) % p
         
     for i in range(T_len - P_len + 1):
-        if T == P:
-            if text[i:i + P_len] == pattern:
+        if T == P and pattern == text[i:i + P_len] :
                 pos.append(i)
         if i < T_len - P_len:
-            T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len]))% p
-            if T < 0:
-                T += p
+            T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len])) % p
+            T = (T + p) % p
 
     return pos
 
-pattern = input()
-text = input()
-
 if __name__ == '__main__':
-    print_occurrences(get_occurrences(pattern, text))
+    print_occurrences(get_occurrences(*read_input()))
