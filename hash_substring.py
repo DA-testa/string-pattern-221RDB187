@@ -1,32 +1,55 @@
-# python3
-
+#221RDB187
 def read_input():
-    # this function needs to aquire input both from keyboard and file
-    # as before, use capital i (input from keyboard) and capital f (input from file) to choose which input type will follow
-    
-    
-    # after input type choice
-    # read two lines 
-    # first line is pattern 
-    # second line is text in which to look for pattern 
-    
-    # return both lines in one return
-    
-    # this is the sample return, notice the rstrip function
-    return (input().rstrip(), input().rstrip())
+    inp = input().rstrip()
+
+
+    if "I" in inp:
+        pattern = input().rstrip()
+        text = input().rstrip()
+    elif "F" in inp:
+        with open('./tests/06', 'r') as fails:
+            pattern = fails.readline().rstrip()
+            text = fails.readline().rstrip()
+        return (pattern.rstrip(), text.rstrip())
+    else:
+        print("Input error")
+
+    return(pattern, text)
 
 def print_occurrences(output):
-    # this function should control output, it doesn't need any return
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    # this function should find the occurances using Rabin Karp alghoritm 
+    P_len = len(pattern)
+    T_len = len(text)
 
-    # and return an iterable variable
-    return [0]
+    if T_len < P_len:
+        return []
+    
 
+    pos = []
+    P = 0
+    T = 0
+    c = 256
+    p = 13
+    h = 1
 
-# this part launches the functions
+    for i in range(P_len - 1):
+        h = (h * c) % p
+    
+
+    for i in range(P_len):
+        P = (c * P + ord(pattern[i])) % p
+        T = (c * T + ord(text[i])) % p
+        
+    for i in range(T_len - P_len + 1):
+        if P == T and pattern == text[i:i + P_len] :
+                pos.append(i)
+        if i < T_len - P_len:
+            T = (c * (T - ord(text[i]) * h) + ord(text[i + P_len])) % p
+            T = (T + p) % p
+
+    return pos
+
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
-
